@@ -1412,7 +1412,7 @@ def GetInventory(server,headers,username,password):
         filename += '.csv'
         print(f'*\n*\nRANDOM OUTPUT FILE CREATED... {filename}\n')
         with open(filename, 'a') as OutFile:
-            OutFile.write('NAME,MODEL,VERSION,STATUS,CHASSIS_SERIAL\n')
+            OutFile.write('NAME,MODEL,VERSION,VDB,SRU,STATUS,CHASSIS_SERIAL\n')
             if INVENTORY['deviceClusters'] != []:
                 for item in INVENTORY['deviceClusters']:
                     serial = ''
@@ -1427,34 +1427,42 @@ def GetInventory(server,headers,username,password):
                         name = item['name']
                         model = item['model']
                         version = item['sw_version']
+                        vdb = item['vdbVersion']
+                        sru = item['sruVersion']
                         status = item['healthStatus']
                         if 'chassisData' in item: serial = item['chassisData']['chassisSerialNo']
-                        OutFile.write(f'{name},{model},{version},{status},{serial}\n')
+                        OutFile.write(f'{name},{model},{version},{sru},{vdb},{status},{serial}\n')
             if INVENTORY['deviceHAPairs'] != []:
                 for item in INVENTORY['deviceHAPairs']:
                     serial = ''
                     name = item['primary']['name']
                     model = item['primary']['model']
+                    sru = item['primary']['sruVersion']
+                    vdb = item['primary']['vdbVersion']
                     version = item['primary']['sw_version']
                     status = item['primary']['healthStatus']
                     if 'chassisData' in item['primary']: serial = item['primary']['chassisData']['chassisSerialNo']
-                    OutFile.write(f'{name},{model},{version},{status},{serial}\n')
+                    OutFile.write(f'{name},{model},{version},{vdb},{sru},{status},{serial}\n')
                     serial = ''
                     name = item['secondary']['name']
                     model = item['secondary']['model']
+                    vdb = item['secondary']['vdbVersion']
+                    sru = item['secondary']['sruVersion']
                     version = item['secondary']['sw_version']
                     status = item['secondary']['healthStatus']
                     if 'chassisData' in item['secondary']: serial = item['secondary']['chassisData']['chassisSerialNo']
-                    OutFile.write(f'{name},{model},{version},{status},{serial}\n')
+                    OutFile.write(f'{name},{model},{version},{vdb},{sru},{status},{serial}\n')
             if INVENTORY['devices'] != []:
                 for item in INVENTORY['devices']:
                     serial = ''
                     name = item['name']
                     model = item['model']
+                    vdb = item['vdbVersion']
+                    sru = item['sruVersion']
                     version = item['sw_version']
                     status = item['healthStatus']
                     if 'chassisData' in item: serial = item['chassisData']['chassisSerialNo']
-                    OutFile.write(f'{name},{model},{version},{status},{serial}\n')
+                    OutFile.write(f'{name},{model},{version},{vdb},{sru},{status},{serial}\n')
 
 
 #

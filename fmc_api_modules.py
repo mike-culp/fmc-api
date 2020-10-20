@@ -57,8 +57,11 @@ def GetDeviceDetails(ID,DeviceList):
     if item['id']==ID:
       temp_dict['name'] = item['name']
       temp_dict['model'] = item['model']
+      temp_dict['deviceSerialNumber'] = item['metadata']['deviceSerialNumber']
       temp_dict['healthStatus'] = item['healthStatus']
       temp_dict['sw_version'] = item['sw_version']
+      temp_dict['sruVersion'] = item['metadata']['sruVersion']
+      temp_dict['vdbVersion'] = item['metadata']['vdbVersion']
       temp_dict['license_caps'] = item['license_caps']
       if 'chassisData' in item['metadata']: temp_dict['chassisData'] = item['metadata']['chassisData']
       # Delete item from Device List
